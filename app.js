@@ -13,6 +13,7 @@ var helmet = require('helmet');
 
 // Express App
 var app = express();
+const router = express.Router();
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(helmet()); // protect against well known vulnerabilities
 app.use(compression()); // Compress all routes
+// app.use('./netlify/functions', router); // for netlify Update
 
 app.use(express.static(path.join(__dirname, 'public')));
 
