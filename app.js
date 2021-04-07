@@ -17,12 +17,8 @@ const router = express.Router();
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB =
-  'mongodb+srv://dishen:dishen@cluster0.zuylw.mongodb.net/local_library?retryWrites=true&w=majority';
-
-// Set up mongoose connection
 var dev_db_url =
-  'mongodb+srv://dishen:dishen@cluster0.zuylw.mongodb.net/local_library?retryWrites=true&w=majority';
+    'mongodb+srv://dishen:dishen@cluster0.zuylw.mongodb.net/local_library?retryWrites=true&w=majority';
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -39,7 +35,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(helmet()); // protect against well known vulnerabilities
 app.use(compression()); // Compress all routes
-// app.use('./netlify/functions', router); // for netlify Update
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -49,18 +44,18 @@ app.use('/catalog', catalogRouter); // Add catalog routes to middleware chain.
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
